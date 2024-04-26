@@ -29,7 +29,7 @@ jobs:
     environment: major-release-update
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Get major release version
         id: get-major-version
@@ -37,7 +37,7 @@ jobs:
           echo "Tag name: ${TAG_NAME}"
           major_version=${TAG_NAME%.*.*}
           echo "Major Version: ${major_version}"
-          echo "::set-output name=major_version::$major_version"
+          echo "major_version=${major_version}" >> "$GITHUB_OUTPUT"
 
       - name: Check if major version exists
         id: check-release
@@ -56,7 +56,7 @@ jobs:
             ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Major Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         if: steps.check-release.outputs.release_exists == 'false'
         id: create_release
         with:

@@ -16,12 +16,12 @@ jobs:
     name: Build
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 20
 
       - name: Install dependencies
         run: npm install
@@ -39,14 +39,14 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Get version
         id: get-version
         run: |
           version=$(cat package.json | jq '.version' --raw-output)
           echo "Version: v${version}"
-          echo "::set-output name=version::v${version}"
+          echo "version=v${version}" >> "$GITHUB_OUTPUT"
 
       - name: Check if release exists
         id: release-check
@@ -71,7 +71,7 @@ jobs:
     if: needs.release-check.outputs.release_exists == 'false'
     steps:
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           name: ${{ needs.release-check.outputs.version }}
           tag_name: ${{ needs.release-check.outputs.version }}

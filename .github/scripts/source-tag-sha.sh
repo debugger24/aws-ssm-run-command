@@ -18,4 +18,4 @@ if [[ $sha == 'null' ]]; then
 fi
 
 echo "SHA for ${tag_name}: ${sha}"
-echo "::set-output name=sha::$sha"
+echo "sha=${sha}" >>"$GITHUB_OUTPUT"

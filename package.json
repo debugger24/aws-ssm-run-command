@@ -26,11 +26,11 @@
   },
   "homepage": "https://github.com/debugger24/action-aws-ssm-run-command#readme",
   "dependencies": {
-    "@actions/core": "^1.9.1",
+    "@actions/core": "^1.10.1",
     "@aws-sdk/client-ssm": "^3.154.0"
   },
   "devDependencies": {
-    "@types/node": "^18.7.11",
+    "@types/node": "^20.12.2",
     "@vercel/ncc": "^0.34.0",
     "typescript": "^4.7.4"
   }
